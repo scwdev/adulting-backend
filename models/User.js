@@ -6,7 +6,7 @@ const userSchema = new Schema(
         password: {type: String, required: true},
         name: String,
         email: {String, required: true, unique: true}
-    }
+    }, {timestamps: true}
 )
 
 const User = model("User", userSchema)
