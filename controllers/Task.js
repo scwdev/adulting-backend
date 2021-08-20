@@ -43,5 +43,49 @@ router.get("/seed", async (req, res) => {
   }
 });
 
+// INDEX Route
+router.get("/", async (Req, res) => {
+    try {
+      const places = await Task.find({});
+      res.json(places);
+    } catch (error) {
+      res.status(400).json(error);
+    }
+  });
+
+  // CREATE Route
+router.post("/", async (req, res) => {
+    try {
+      const newTask = await Task.create(req.body);
+      res.json(newTask);
+    } catch (error) {
+      res.status(400).json(error);
+    }
+  });
+
+  // UPDATE Route
+router.put("/:id", async (req, res) => {
+    try {
+      const updatedTask = await Task.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true }
+      );
+      res.json(updatedTask);
+    } catch (error) {
+      res.status(400).json(error);
+    }
+  });
+
+  // DELETE Route
+router.delete("/:id", async (req, res) => {
+    try {
+      const deletedTask = await Task.findByIdAndRemove(req.params.id);
+      res.json(deletedTask);
+    } catch (error) {
+      res.status(400).json(error);
+    }
+  });
+
 // export the router which has all our routes registered to it
 module.exports = router;
