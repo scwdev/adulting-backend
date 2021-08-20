@@ -35,7 +35,7 @@ Users:
 Tasks:
 - name: String, required
 - frequency: Number, required
-- Countdown: Time
+- countdown: Number (ms since epoch)
 - tags: [Strings... ]
 - checklist: [Strings... ]
 - Timestamp
