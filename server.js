@@ -13,9 +13,9 @@ const {log} = require("mercedlogger");
 const mongoose = require("./db/connection");
 
 // IMPORT ROUTERS
-const tasksRouter = require("./controllers/Task")
+// const tasksRouter = require("./controllers/Task")
 const UserRouter = require("./controllers/User")
-const TodoRouter = require("./controllers/Todo") 
+const TaskRouter = require("./controllers/Task") 
 
 // CREATE EXPRESS APPLICATION OBJECT
 const app = express();
@@ -27,9 +27,9 @@ app.use(morgan("tiny"));
 
 // ROUTES AND ROUTES
 app.get("/", (req, res) => res.send("Server is Working")); // <--- Route to test server
-app.use("/tasks", tasksRouter);
+// app.use("/tasks", tasksRouter);
 app.use("/user", UserRouter);
-app.use("/todos", TodoRouter)
+app.use("/tasks", TaskRouter)
 
 // LISTENER
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
