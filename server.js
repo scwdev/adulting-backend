@@ -6,13 +6,16 @@ const PORT = process.env.PORT;
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const {log} = require("mercedlogger");
+
 
 // IMPORT DATABASE CONNECTION
 const mongoose = require("./db/connection");
 
 // IMPORT ROUTERS
 const tasksRouter = require("./controllers/Task")
-const usersRouter = require("./controllers/User")
+const UserRouter = require("./controllers/User")
+const TodoRouter = require("./controllers/Todo") 
 
 // CREATE EXPRESS APPLICATION OBJECT
 const app = express();
@@ -25,7 +28,8 @@ app.use(morgan("tiny"));
 // ROUTES AND ROUTES
 app.get("/", (req, res) => res.send("Server is Working")); // <--- Route to test server
 app.use("/tasks", tasksRouter);
-app.use("/users", usersRouter);
+app.use("/user", UserRouter);
+app.use("/todos", TodoRouter)
 
 // LISTENER
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
