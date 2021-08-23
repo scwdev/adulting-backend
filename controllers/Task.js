@@ -1,91 +1,70 @@
-const router = require("express").Router();
-const { Router } = require("express");
+const { Router } = require("express"); // import Router from express
+const Task = require("../models/Task"); // import Task model
+const { isLoggedIn } = require("./middleware"); // import isLoggedIn custom middleware
 
-const Task = require("../models/Task");
+const router = Router();
 
-// SEED DATA FOR SEED ROUTE
-const placeTask = [
-    {
-        username: "naomblanks",
-        name: "Clean Kitchen",
-        frequency: 2,
-        countdown: 800,
-        tags: "Kitchen",
-        checklist: "Do dishes"
-    },
-    {
-        username: "samwellmer",
-        name: "Clean Bathroom",
-        frequency: 2,
-        countdown: 123151231232125512,
-        tags: "Bathroom",
-        checklist: "Scrub toilet"
-    },
-  {
-        username: "chrisabadilla",
-        name: "Grooming",
-        frequency: 2,
-        countdown: 43123123123,
-        tags: "Self Care",
-        checklist: "Get haircut"
-    }
-];
+//custom middleware could also be set at the router level like so
+// router.use(isLoggedIn) then all routes in this router would be protected
 
-// SEED ROUTE
-router.get("/seed", async (req, res) => {
-  try {
-    await Task.remove({});
-    await Task.create(placeTask);
-    const tasks = await Task.find({});
-    res.json(tasks);
-  } catch (error) {
-    res.status(400).json(error);
-  }
+// Index Route with isLoggedIn middleware
+router.get("/", isLoggedIn, async (req, res) => {
+  const { username } = req.user; // get username from req.user property created by isLoggedIn middleware
+  //send all Tasks with that user
+  res.json(
+    await Task.find({ username }).catch((error) =>
+      res.status(400).json({ error })
+    )
+  );
 });
 
-// INDEX Route
-router.get("/", async (Req, res) => {
-    try {
-      const places = await Task.find({});
-      res.json(places);
-    } catch (error) {
-      res.status(400).json(error);
-    }
-  });
+// Show Route with isLoggedIn middleware
+router.get("/:id", isLoggedIn, async (req, res) => {
+  const { username } = req.user; // get username from req.user property created by isLoggedIn middleware
+  const _id = req.params.id; // get id from params
+  //send target Task
+  res.json(
+    await Task.findOne({ username, _id }).catch((error) =>
+      res.status(400).json({ error })
+    )
+  );
+});
 
-  // CREATE Route
-router.post("/", async (req, res) => {
-    try {
-      const newTask = await Task.create(req.body);
-      res.json(newTask);
-    } catch (error) {
-      res.status(400).json(error);
-    }
-  });
+// create Route with isLoggedIn middleware
+router.post("/", isLoggedIn, async (req, res) => {
+  const { username } = req.user; // get username from req.user property created by isLoggedIn middleware
+  req.body.username = username; // add username property to req.body
+  //create new Task and send it in response
+  res.json(
+    await Task.create(req.body).catch((error) =>
+      res.status(400).json({ error })
+    )
+  );
+});
 
-  // UPDATE Route
-router.put("/:id", async (req, res) => {
-    try {
-      const updatedTask = await Task.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        { new: true }
-      );
-      res.json(updatedTask);
-    } catch (error) {
-      res.status(400).json(error);
-    }
-  });
+// update Route with isLoggedIn middleware
+router.put("/:id", isLoggedIn, async (req, res) => {
+  const { username } = req.user; // get username from req.user property created by isLoggedIn middleware
+  req.body.username = username; // add username property to req.body
+  const _id = req.params.id;
+  //update Task with same id if belongs to logged in User
+  res.json(
+    await Task.updateOne({ username, _id }, req.body, { new: true }).catch(
+      (error) => res.status(400).json({ error })
+    )
+  );
+});
 
-  // DELETE Route
-router.delete("/:id", async (req, res) => {
-    try {
-      const deletedTask = await Task.findByIdAndRemove(req.params.id);
-      res.json(deletedTask);
-    } catch (error) {
-      res.status(400).json(error);
-    }
-  });
+// update Route with isLoggedIn middleware
+router.delete("/:id", isLoggedIn, async (req, res) => {
+  const { username } = req.user; // get username from req.user property created by isLoggedIn middleware
+  const _id = req.params.id;
+  //remove Task with same id if belongs to logged in User
+  res.json(
+    await Task.remove({ username, _id }).catch((error) =>
+      res.status(400).json({ error })
+    )
+  );
+});
 
-// export the router which has all our routes registered to it
-module.exports = router;
+module.exports = router

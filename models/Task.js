@@ -4,11 +4,12 @@ const taskSchema = new Schema(
     {
         username: {type: String, required: true},
         name: {type: String, required: true},
-        frequency: Number,
-        countdown: Number,
+        frequency: {type: Number, default: 7},
+        lastDone: Number,
         tags: [String],
         checklist: [String]
-    }, {timestamps: true}
+    },
+    {timestamps: true}
 )
 
 const Task = model("Task", taskSchema)
