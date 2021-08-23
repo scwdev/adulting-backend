@@ -1,0 +1,42 @@
+[
+    {
+        "username": "test",
+        "name": "replace toothbrush",
+        "frequency": 84,
+        "lastDone": 1628022260,
+        "tags": ["hygene", "bathroom", "shopping"],
+        "checklist": []
+    },
+    {
+        "username": "test",
+        "name": "call mom",
+        "frequency": 7,
+        "lastDone": 1628627187,
+        "tags": ["family", "relationship"],
+        "checklist": []
+    },
+    {
+        "username": "test",
+        "name": "change sheets",
+        "frequency": 14,
+        "lastDone": 1629404862,
+        "tags": ["bedroom", "laundry", "hygene"],
+        "checklist": []
+    },
+    {
+        "username": "test",
+        "name": "take cat for checkup",
+        "frequency": 180,
+        "lastDone": 1619209770,
+        "tags": [],
+        "checklist": []
+    },
+    {
+        "username": "test",
+        "name": "clean fridge",
+        "frequency": 48,
+        "lastDone": 1614112170,
+        "tags": [],
+        "checklist": []
+    }
+]
