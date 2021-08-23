@@ -8,7 +8,8 @@ const taskSchema = new Schema(
         countdown: Number,
         tags: [String],
         checklist: [String]
-    }, {timestamps: true}
+    },
+    {timestamps: true}
 )
 
 const Task = model("Task", taskSchema)
