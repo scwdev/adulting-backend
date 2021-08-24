@@ -5,7 +5,7 @@ const taskSchema = new Schema(
         username: {type: String, required: true},
         name: {type: String, required: true},
         frequency: {type: Number, default: 7},
-        lastDone: Number,
+        lastDone: Object,
         tags: [String],
         checklist: [String]
     },
