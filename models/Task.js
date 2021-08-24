@@ -7,7 +7,7 @@ const taskSchema = new Schema(
         frequency: Number,
         lastDone: Object,
         tags: [String],
-        checklist: [String]
+        checklist: [{name: String, checked: {type: Boolean, default: false}}]
     },
     {timestamps: true}
 )
