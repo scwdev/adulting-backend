@@ -1,6 +1,6 @@
 [
     {
-        "username": "test",
+        "username": "test@test.test",
         "name": "replace toothbrush",
         "frequency": 84,
         "lastDone": 1628022260,
@@ -8,7 +8,7 @@
         "checklist": []
     },
     {
-        "username": "test",
+        "username": "test@test.test",
         "name": "call mom",
         "frequency": 7,
         "lastDone": 1628627187,
@@ -16,7 +16,7 @@
         "checklist": []
     },
     {
-        "username": "test",
+        "username": "test@test.test",
         "name": "change sheets",
         "frequency": 14,
         "lastDone": 1629404862,
@@ -24,7 +24,7 @@
         "checklist": []
     },
     {
-        "username": "test",
+        "username": "test@test.test",
         "name": "take cat for checkup",
         "frequency": 180,
         "lastDone": 1619209770,
@@ -32,7 +32,7 @@
         "checklist": []
     },
     {
-        "username": "test",
+        "username": "test@test.test",
         "name": "clean fridge",
         "frequency": 48,
         "lastDone": 1614112170,
